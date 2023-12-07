@@ -1,21 +1,65 @@
-import React from 'react'
-import { Navbar } from '../NavBar/Navbar'
-import { SearchForm } from '../SearchForm/SearchForm'
+//import React from 'react' in the updated version of react no need to import react
 
-export const header = () => {
-  return (
-    <div className='holder'>
-        <header className='header'>
-            <Navbar/>
-            <div className="header-content flex flex-c text-center text-white">
-                <h2 className='header-title text-cspitative'>
-                    Find your choise
-                </h2><br/>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima blanditiis tempore quos. Repudiandae odit nostrum sequi similique officia a suscipit dicta delectus fugiat nam esse saepe autem accusamus, dolorum repellendus?</p>
-                <SearchForm/>
+import {useState} from 'react'
+//Navigation links call
+import { Link } from 'react-router-dom' 
+import './Header.css'
 
+import MenuIcon from '@mui/icons-material/Menu'
+import ClearIcon from '@mui/icons-material/Clear'
+
+
+const Header = () => {
+    //this is for toggle button
+    //const[variable, function]
+    const [menutoggle, setMenutoggle] = useState(false)
+
+    const Toggle = () => {
+        setMenutoggle(!menutoggle)
+    }
+
+    const closeMenu = () => {
+        setMenutoggle(false)
+    }
+
+    return (
+        <div className="header">
+            <div className="logo-nav">
+            <Link to='/'>
+                <a href="#home">LIBRARY</a>
+            </Link>
             </div>
-        </header>
-    </div>
+            
+            <div className='nav-right'>
+                <input className='search-input' type='text' placeholder='Search a Book'/>
+                <ul className={menutoggle ? "nav-options active" : "nav-options"}>
+                    <li className="option" onClick={() => { closeMenu() }}>
+                        <Link to='/'>
+                            <a href="#home">Home</a>
+                        </Link>
+                    </li>
+                    <li className="option" onClick={() => { closeMenu() }}>
+                        <Link to='/books'>
+                        <a href="#books">Books</a>
+                        </Link>
+                    </li>
+                    <li className="option" onClick={() => { closeMenu() }}>
+                        <Link to='/signin'>
+                        <a href='signin'>SignIn</a>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+
+            <div className="mobile-menu" onClick={() => { Toggle() }}>
+                {menutoggle ? (
+                    <ClearIcon className="menu-icon" style={{ fontSize: 40 }} />
+                ) : (
+                    <MenuIcon className="menu-icon" style={{ fontSize: 40 }} />
+                )}
+            </div>
+        </div>
   )
 }
+
+export default Header;
