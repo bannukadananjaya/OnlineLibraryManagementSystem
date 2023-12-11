@@ -1,11 +1,13 @@
+// export default Signin
 import{ useContext, useState } from 'react'
 import './Signin.css'
 import axios from 'axios'
-import { AuthContext } from '../../components/Context/AuthContext'
+import { AuthContext } from '../../context/AuthContext'
 import Switch from '@mui/material/Switch';
 
 function Signin() {
     //default student signin
+    
     const [isStudent, setIsStudent] = useState(true)
     const [admissionId, setAdmissionId] = useState()
     const [employeeId,setEmployeeId] = useState()
@@ -14,15 +16,27 @@ function Signin() {
     const { dispatch } = useContext(AuthContext)
 
     const api = axios.create({
-        baseURL:'http://localhost:5173/'
+        baseURL:'http://192.168.43.219:3000/'
     })
     //const API_URL = process.env.REACT_APP_API_URL
     
-    const loginCall = async (userCredential, dispatch) => {
+    // const BASE_URL = 'http://localhost:3000/'
+
+    const loginCall = (userCredential, dispatch) => {
         dispatch({ type: "LOGIN_START" });
+        console.log(userCredential);
+
         try {
-            const res = await axios.post(api+"api/auth/signin", userCredential);
-            dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+            // const res = await axios.post("http://192.168.43.219:3000/api/auth/signin", userCredential);
+            axios.post("http://localhost:3000/api/auth/signin", userCredential).then(res => {
+                console.log(res.data)
+                console.log('res.data')
+                dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+            }).catch(e => {
+                console.log(e)
+            })
+            // console.log('res.data');  
+            // dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         }
         catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload: err })
@@ -61,7 +75,7 @@ function Signin() {
                     <a className="forget-pass" href="#home">Forgot password?</a>
                 </form>
                 <div className='signup-option'>
-                    <p className="signup-question">Don't have an account? Contact Librarian</p>
+                    <p className="signup-question">Dont have an account? Contact Librarian</p>
                 </div>
             </div>
         </div>

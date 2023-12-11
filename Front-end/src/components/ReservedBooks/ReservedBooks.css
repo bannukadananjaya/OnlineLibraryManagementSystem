@@ -6,6 +6,7 @@
 }
 
 .reservedbooks-table{
+    margin-top: 20px;
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -23,6 +24,8 @@
 
 
 .reservedbooks-title{
+    padding: 20px 0;
+    margin-bottom: 30px;
     position: relative;
     color: rgb(238,129,30);
     text-align: center;

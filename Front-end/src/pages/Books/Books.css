@@ -57,22 +57,24 @@
 .bookcard-category{
     display: flex;
     flex-wrap: wrap;
-    position: absolute;
+    /* position: absolute; */
     bottom: 5%;
     left: 5%;
 }
 
 .bookcard-category p{
     padding: 8px 15px;
-    background-color: lightgray;
+    /* background-color: lightgray; */
     font-weight: 600;
     margin: 5px;
     border-radius: 5px;
 }
 
 .bookcard-emptybox{
-    height: 50px;
+    height: auto;
     position: relative;
     bottom: 0%;
-    background-color: rgb(0, 0, 0);
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 5px;
 }

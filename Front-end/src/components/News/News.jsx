@@ -25,7 +25,7 @@ function News() {
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
                                 industry.</p>
                         </div>
-                        <div className='news-competition-event'>
+                        {/* <div className='news-competition-event'>
                             <p>Competion-4</p>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
                                 industry.</p>
@@ -34,7 +34,7 @@ function News() {
                             <p>Competion-5</p>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
                                 industry.</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className='news-empty'></div>
@@ -56,7 +56,7 @@ function News() {
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
                                 industry.</p>
                         </div>
-                        <div className='news-quiz-event'>
+                        {/* <div className='news-quiz-event'>
                             <p>Quiz-4</p>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
                                 industry.</p>
@@ -65,7 +65,7 @@ function News() {
                             <p>Quiz-5</p>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
                                 industry.</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className='news-empty'></div>

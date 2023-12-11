@@ -3,10 +3,11 @@ import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import WelcomeBox from "../../components/WelcomeBox/WelcomeBox";
 import Stats from "../../components/Stats/Stats";
 import News from '../../components/News/News'
-// import PhotoGallery from '../../Components/PhotoGallery/PhotoGalary'
+//import PhotoGallery from '../../Components/PhotoGallery/PhotoGalary'
 import PopularBooks from '../../Components/PopularBooks/PopularBooks'
 import RecentAddedBooks from '../../Components/RecentBooks/RecentBooks'
 import ReservedBooks from '../../Components/ReservedBooks/ReservedBooks'
+import Categories from "../../components/categories/Categories";
 
 function Home() {
   return (
@@ -14,6 +15,7 @@ function Home() {
       <ImageSlider/>
       <WelcomeBox/>
       <Stats/>
+      <Categories/>
       <PopularBooks/>
       <RecentAddedBooks/>
       <ReservedBooks/>

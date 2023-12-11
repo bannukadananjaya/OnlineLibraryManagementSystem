@@ -1,13 +1,16 @@
 import { useContext, useEffect, useState } from 'react'
 import "../AdminDashboard.css"
 import axios from "axios"
-import { AuthContext } from '../../../../components/Context/AuthContext'
+import { AuthContext } from '../../../../context/AuthContext'
 import { Dropdown } from 'semantic-ui-react'
+
 
 function AddBook() {
 
-    const API_URL = process.env.REACT_APP_API_URL
+    const API_URL = "http://localhost:3000/"
+
     const [isLoading, setIsLoading] = useState(false)
+
     const { user } = useContext(AuthContext)
 
     const [bookName, setBookName] = useState("")
@@ -16,6 +19,8 @@ function AddBook() {
     const [bookCountAvailable, setBookCountAvailable] = useState(null)
     const [language, setLanguage] = useState("")
     const [publisher, setPublisher] = useState("")
+    const [details, setdetails]=useState("");
+    const [image, setimage] = useState("");
     const [allCategories, setAllCategories] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
     const [recentAddedBooks, setRecentAddedBooks] = useState([])
@@ -26,6 +31,10 @@ function AddBook() {
         const getAllCategories = async () => {
             try {
                 const response = await axios.get(API_URL + "api/categories/allcategories")
+                // console.log(response);
+                // const categories = JSON.parse(response.data);
+                // console.log(typeof response.data);
+                console.log(response.data);
                 const all_categories = await response.data.map(category => (
                     { value: `${category._id}`, text: `${category.categoryName}` }
                 ))
@@ -50,6 +59,8 @@ function AddBook() {
             language: language,
             publisher: publisher,
             categories: selectedCategories,
+            details:details,
+            image:image,
             isAdmin: user.isAdmin
         }
         try {
@@ -64,7 +75,9 @@ function AddBook() {
             setBookCountAvailable(null)
             setLanguage("")
             setPublisher("")
+            setdetails("")
             setSelectedCategories([])
+            setimage("")
             alert("Book Added Successfully 🎉")
         }
         catch (err) {
@@ -107,6 +120,9 @@ function AddBook() {
                 <label className="addbook-form-label" htmlFor="copies">No.of Copies Available<span className="required-field">*</span></label><br />
                 <input className="addbook-form-input" type="text" name="copies" value={bookCountAvailable} onChange={(e) => { setBookCountAvailable(e.target.value) }} required></input><br />
 
+                <label className="addbook-form-label" htmlFor="details">Details</label><br />
+                <input className="addbook-form-input" type="text" name="details" value={details} onChange={(e) => { setdetails(e.target.value) }}></input><br />
+
                 <label className="addbook-form-label" htmlFor="categories">Categories<span className="required-field">*</span></label><br />
                 <div className="semanticdropdown">
                     <Dropdown
@@ -120,6 +136,9 @@ function AddBook() {
                         onChange={(event, value) => setSelectedCategories(value.value)}
                     />
                 </div>
+
+                <label className="addbook-form-label" htmlFor="image">Image</label><br />
+                <input className="addbook-form-input" type="text" name="image" value={image} onChange={(e) => { setimage(e.target.value) }}></input><br />
 
                 <input className="addbook-submit" type="submit" value="SUBMIT" disabled={isLoading}></input>
             </form>

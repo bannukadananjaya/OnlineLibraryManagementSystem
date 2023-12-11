@@ -7,7 +7,7 @@ import moment from "moment"
 
 function GetMember() {
 
-    const API_URL = process.env.REACT_APP_API_URL
+    const API_URL = 'http://localhost:3000/'
 
     const [allMembersOptions, setAllMembersOptions] = useState(null)
     const [memberId, setMemberId] = useState(null)
@@ -18,6 +18,9 @@ function GetMember() {
         const getMembers = async () => {
             try {
                 const response = await axios.get(API_URL + "api/users/allmembers")
+                // console.log("jbabjhc cashmba cmsb acsdba sc")
+                console.log(response)
+
                 setAllMembersOptions(response.data.map((member) => (
                     { value: `${member?._id}`, text: `${member?.userType === "Student" ? `${member?.userFullName}[${member?.admissionId}]` : `${member?.userFullName}[${member?.employeeId}]`}` }
                 )))

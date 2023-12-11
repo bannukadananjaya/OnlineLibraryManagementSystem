@@ -1,17 +1,18 @@
 import { useContext, useEffect, useState } from "react";
-import "../AdminDashboard/AdminDashboard.css";
+
 import "./StudentDashboard.css";
 
-// import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import BookIcon from "@mui/icons-material/Book";
-// import HistoryIcon from "@mui/icons-material/History";
-// import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-// import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
-// import CloseIcon from "@mui/icons-material/Close";
-// import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-// //import { IconButton } from '@mui/icons-material/core';
-// import { AuthContext } from "../../../components/Context/AuthContext";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BookIcon from "@mui/icons-material/Book";
+import HistoryIcon from "@mui/icons-material/History";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import CloseIcon from "@mui/icons-material/Close";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import IconButton from "@mui/material/IconButton";
+
+import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 import moment from "moment";
 
@@ -19,7 +20,7 @@ function MemberDashboard() {
   const [active, setActive] = useState("profile");
   const [sidebar, setSidebar] = useState(false);
 
-  const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = "http://localhost:3000/";
   const { user } = useContext(AuthContext);
   const [memberDetails, setMemberDetails] = useState(null);
 
@@ -29,7 +30,9 @@ function MemberDashboard() {
         const response = await axios.get(
           API_URL + "api/users/getuser/" + user._id
         );
+        console.log(response);
         setMemberDetails(response.data);
+        console.log(response.data);
       } catch (err) {
         console.log("Error in fetching the member details");
       }
@@ -61,7 +64,7 @@ function MemberDashboard() {
         >
           <div className="dashboard-logo">
             <LibraryBooksIcon style={{ fontSize: 50 }} />
-            <p className="logo-name">LCMS</p>
+            <p className="logo-name">LMS</p>
           </div>
           <a
             href="#profile@member"
@@ -267,7 +270,6 @@ function MemberDashboard() {
 
           <div
             className="member-reservedbooks-content"
-            id="reservedbooks@member"
           >
             <p className="member-dashboard-heading">Reserved</p>
             <table className="activebooks-table">
@@ -277,20 +279,6 @@ function MemberDashboard() {
                 <th>From</th>
                 <th>To</th>
               </tr>
-              {memberDetails?.activeTransactions
-                ?.filter((data) => {
-                  return data.transactionType === "Reserved";
-                })
-                .map((data, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{data.bookName}</td>
-                      <td>{data.fromDate}</td>
-                      <td>{data.toDate}</td>
-                    </tr>
-                  );
-                })}
             </table>
           </div>
           <div className="member-history-content" id="history@member">
@@ -303,17 +291,6 @@ function MemberDashboard() {
                 <th>To</th>
                 <th>Return Date</th>
               </tr>
-              {memberDetails?.prevTransactions?.map((data, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{data.bookName}</td>
-                    <td>{data.fromDate}</td>
-                    <td>{data.toDate}</td>
-                    <td>{data.returnDate}</td>
-                  </tr>
-                );
-              })}
             </table>
           </div>
         </div>

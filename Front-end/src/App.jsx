@@ -1,31 +1,48 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Signin from "./pages/Signin/Signin";
-import Books from "./pages/Books/Books"
-import StudentDashboard from "./pages/Dashboard/StudentDashboard/StudentDashboard";
+import Books from "./pages/Books/Books";
+import MemberDashboard from "./pages/Dashboard/StudentDashboard/StudentDashboard";
 import AdminDashboard from "./pages/Dashboard/AdminDashboard/AdminDashboard";
 import About from "./pages/About/About";
-import Contact from "./pages/Contact/contact";
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer'
-
+//import Contact from "./pages/Contact/contact";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import {useContext} from "react";
+import { AuthContext } from "./context/AuthContext"; 
 function App() {
+  const { user } = useContext(AuthContext)
   return (
     <Router>
-      <div>
+      <>
       <Header/>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/Books" element={<Books/>} />
-          <Route path="/About" element={<About />} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/Signin" element={<Signin />} />
-          <Route path="/dashboard@student" element={<StudentDashboard />} />
-          <Route path="/dashboard@admin" element={<AdminDashboard />} />
-        </Routes>
-        <Footer/>
-      </div>
-      
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Books" element={<Books />} />
+        <Route path="/signin" element={user ? (user.isAdmin ? <Navigate replace to='/dashboard@admin'/> : <Navigate replace to='/dashboard@member'/>) : <Signin />} />
+        <Route path="/dashboard@member" element={user ? (user.isAdmin ===false ? <MemberDashboard/> : <Navigate replace to='/'/> ):  <Navigate replace to='/'/>} />
+        <Route path="/dashboard@admin" element={user ? (user.isAdmin ===true ? <AdminDashboard/> : <Navigate replace to='/'/>):<Navigate replace to='/'/>}/>
+        <Route path="/dashboard@admin" element={<AdminDashboard />} />
+
+        {/* <Route path={user ? (user.isAdmin ? '/dashboard@admin' : '/dashboard@member') : '/Signin'} element={<Signin />} /> */}
+        
+        {/* <Route exact path='/signin'>
+            {user ? (user.isAdmin ? <Redirect to='/dashboard@admin' />:<Redirect to='/dashboard@member' />) : <Signin />}
+          </Route> */}
+          {/* <Route exact path='/dashboard@member'>
+            {user ? (user.isAdmin === false ? <MemberDashboard /> : <Redirect to='/' />) : <Redirect to='/' />}
+          </Route>
+          <Route exact path='/dashboard@admin'>
+            {user ? (user.isAdmin === true ? <AdminDashboard /> : <Redirect to='/' />) : <Redirect to='/' />}
+          </Route> */}
+          {/* <Route exact path='/books'>
+            <Allbooks />
+          </Route> */}   
+      </Routes>
+      <Footer/>
+      </>
+
     </Router>
   );
 }

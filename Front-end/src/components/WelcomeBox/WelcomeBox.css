@@ -3,17 +3,18 @@
 }
 
 .welcome-box{
+    margin-top: 200px;
     width: 100%;
     height: auto;
-    background-color: rgb(247,235,215);
+    /* background-color: rgb(247,235,215); */
     text-align: center;
 }
 
 .welcome-title{
-    font-size: 40px;
+    font-size: 60px;
     font-weight: 900;
     padding: 15px;
-    color: blue;
+    color: whitesmoke;
     text-shadow: 
         1px 1px 0 #18e657,
         2px 2px 0 #bf189b,
@@ -23,12 +24,13 @@
 }
 
 .welcome-message{
-    font-size: 25px;
+    font-size: 45px;
     font-weight: 800;
     padding-bottom: 15px;
+    color: white;
 }
 
 .welcome-submessage{
-    font-size: 15px;
+    font-size: 25px;
     font-weight: 600;
 }

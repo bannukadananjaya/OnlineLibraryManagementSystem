@@ -1,0 +1,42 @@
+[
+  {
+    "bookName": "Sapiens: A Brief History of Humankind",
+    "alternateTitle": "",
+    "author": "Yuval Noah Harari",
+    "language": "English",
+    "publisher": "Harper",
+    "details": "A book about the history of mankind",
+    "bookCountAvailable": 7,
+    "bookStatus": "Available",
+    "image": "sapiens.jpg",
+    "categories": ["657547395fc3736e0a193464"],
+    "transactions": []
+  },
+  {
+    "bookName": "The Great Gatsby",
+    "alternateTitle": "",
+    "author": "F. Scott Fitzgerald",
+    "language": "English",
+    "publisher": "Charles Scribner's Sons",
+    "details": "A novel depicting the Jazz Age",
+    "bookCountAvailable": 5,
+    "bookStatus": "Available",
+    "image": "gatsby.jpg",
+    "categories": ["657547395fc3736e0a193465"],
+    "transactions": []
+  },
+  {
+    "bookName": "To Kill a Mockingbird",
+    "alternateTitle": "",
+    "author": "Harper Lee",
+    "language": "English",
+    "publisher": "J. B. Lippincott & Co.",
+    "details": "A novel set in the American South",
+    "bookCountAvailable": 3,
+    "bookStatus": "Available",
+    "image": "mockingbird.jpg",
+    "categories": ["657547395fc3736e0a193465"],
+    "transactions": []
+  }
+  // Add more books as needed
+]

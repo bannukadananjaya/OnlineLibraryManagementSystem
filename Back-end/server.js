@@ -7,6 +7,7 @@ import userRoutes from './routes/users.js';
 import bookRoutes from './routes/book.js';
 import transactionRoutes from "./routes/transactions.js";
 import categoryRoutes from './routes/cartegory.js';
+// import images from './images/books';
 
 /* App Config */
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 /* API Routes */
+app.use("/images",express.static("images"))
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/books", bookRoutes);
@@ -26,6 +28,7 @@ app.use("/api/categories", categoryRoutes);
 
 /* MongoDB connection */
 mongoose.connect(
+
   process.env.MONGO_URL,
   {
     useCreateIndex: true,

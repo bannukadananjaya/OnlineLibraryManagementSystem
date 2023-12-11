@@ -44,6 +44,11 @@ const Header = () => {
                         </Link>
                     </li>
                     <li className="option" onClick={() => { closeMenu() }}>
+                        <Link to='/about'>
+                        <a href="#about">About</a>
+                        </Link>
+                    </li>
+                    <li className="option" onClick={() => { closeMenu() }}>
                         <Link to='/signin'>
                         <a href='signin'>SignIn</a>
                         </Link>

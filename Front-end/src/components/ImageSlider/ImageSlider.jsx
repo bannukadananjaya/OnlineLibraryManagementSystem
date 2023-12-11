@@ -1,44 +1,48 @@
 //import React from 'react'
 import './ImageSlider.css'
 import { Carousel } from 'react-bootstrap'
+import img1 from '../../assets/images/img slider/img1.jpg'
+import img2 from '../../assets/images/img slider/img2.jpg'
+import img3 from '../../assets/images/img slider/img3.jpg'
+
 
 function ImageSlider() {
     return (
         <div className='slider'>
             <Carousel>
-                <Carousel.Item interval={1000}>
+                {/* <Carousel.Item interval={1000}>
                     <img
-                        className="d-block w-100"
-                        src="https://images.unsplash.com/photo-1616070152767-3eb99cf10509?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                        className='full-height-cover'
+                        src={img1}
                         alt="First slide"
                     />
                     <Carousel.Caption>
-                        <h3>First slide label</h3>
+                        {/* <h3>First slide label</h3>
                         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </Carousel.Caption>
-                </Carousel.Item>
+                </Carousel.Item> */}
                 <Carousel.Item interval={500}>
                     <img
-                        className="d-block w-100"
-                        src="https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1049&q=80"
+                        className="full-height-cover"
+                        src={img2}
                         alt="Second slide"
                     />
                     <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h3>Discover the World Between the Pages</h3>
+                        <p>Books hold the power to enlighten, entertain, and inspire. Dive into their embrace and embark on limitless journeys.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
-                        src="https://images.unsplash.com/photo-1608454367599-c133fcab1245?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                        className="full-height-cover"
+                        src={img3}
                         alt="Third slide"
                     />
                     <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        <h3>Where Knowledge Unfolds</h3>
+                        <p>PBooks, the timeless gateway to imagination and wisdom, await to transport you to new worlds and expand your horizons.</p>
                     </Carousel.Caption>
-                </Carousel.Item>
+                </Carousel.Item> 
             </Carousel>
         </div>
     )
