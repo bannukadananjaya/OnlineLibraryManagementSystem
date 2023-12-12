@@ -30,9 +30,9 @@ function MemberDashboard() {
         const response = await axios.get(
           API_URL + "api/users/getuser/" + user._id
         );
-        console.log(response);
+        // console.log(response);
         setMemberDetails(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         console.log("Error in fetching the member details");
       }

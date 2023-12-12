@@ -19,9 +19,9 @@ router.get("/allbooks", async (req, res) => {
 router.get("/getbook/:id", async (req, res) => {
     try {
         const book = await Book.findById(req.params.id).populate("transactions")
-        res.status(200).json(book)
+        res.json(book)
     }
-    catch {
+    catch(err) {
         return res.status(500).json(err)
     }
 })

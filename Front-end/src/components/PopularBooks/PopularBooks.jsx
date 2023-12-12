@@ -44,14 +44,6 @@ const PopularBooks = () => {
     getAllCategories();
   }, [API_URL]);
 
-  //   useEffect(() => {
-  //     const getallBooks = async () => {
-  //         const response = await axios.get(API_URL + "api/books/allbooks")
-  //         setRecentAddedBooks(response.data.slice(0, 5))
-  //     }
-  //     getallBooks()
-  // }, [API_URL])
-
 if(!books)
   return null
 if(books)

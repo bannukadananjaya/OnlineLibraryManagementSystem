@@ -52,7 +52,7 @@ function AdminDashboard() {
                         <AccountCircleIcon style={{ fontSize: 50 }} />
                         <p className="logo-name">ADMIN</p>
                     </div>
-                    {/* <p className={`dashboard-option ${active === "profile" ? "clicked" : ""}`} onClick={() => { setActive("profile"); setSidebar(false) }}><AccountCircleIcon className='dashboard-option-icon' /> Profile</p> */}
+                     <p className={`dashboard-option ${active === "active" ? "clicked" : ""}`} onClick={() => { setActive("profile"); setSidebar(false) }}><AccountCircleIcon className='dashboard-option-icon' /> Profile</p> 
                     <p className={`dashboard-option ${active === "addbook" ? "clicked" : ""}`} onClick={() => { setActive("addbook"); setSidebar(false) }}><BookIcon className='dashboard-option-icon' />Add Book</p>
                     <p className={`dashboard-option ${active === "addtransaction" ? "clicked" : ""}`} onClick={() => { setActive("addtransaction"); setSidebar(false) }}><ReceiptIcon className='dashboard-option-icon' /> Add Transaction </p>
                     <p className={`dashboard-option ${active === "getmember" ? "clicked" : ""}`} onClick={() => { setActive("getmember"); setSidebar(false) }}><AccountBoxIcon className='dashboard-option-icon' /> Get Member </p>
@@ -62,15 +62,73 @@ function AdminDashboard() {
 
                 </div>
 
-                {/* //// */}
-            
-                {/* //// */}
-
+             
                 <div className="dashboard-option-content">
-                    {/* Add admin details */}
-                    <div>
-
+                   
+                <div className="member-profile-content" id="profile" style={active !== "profile" ? { display: 'none' } : {}}>
+                    <div className="user-details-topbar">
+                    <img
+                        className="user-profileimage"
+                        src="./assets/images/Profile.png"
+                        alt=""
+                    ></img>
+                    <div className="user-info">
+                        <p className="user-name">ADMIN</p>
+                        <p className="user-id">
+                        EP21324
+                        </p>
+                        <p className="user-email">Saracjdom@email.com</p>
+                        <p className="user-phone">736378642</p>
                     </div>
+                </div>
+                <div className="user-details-specific">
+                    <div className="specific-left">
+                        <div className="specific-left-top">
+                            <p className="specific-left-topic">
+                                <span style={{ fontSize: "18px" }}>
+                                <b>Age</b>
+                                </span>
+                                <span style={{ fontSize: "16px" }}>
+                                28
+                                </span>
+                            </p>
+                            <p className="specific-left-topic">
+                                <span style={{ fontSize: "18px" }}>
+                                <b>Gender</b>
+                                </span>
+                                <span style={{ fontSize: "16px" }}>
+                                Male
+                                </span>
+                            </p>
+                        </div>
+                        <div className="specific-left-bottom">
+                            <p className="specific-left-topic">
+                                <span style={{ fontSize: "18px" }}>
+                                <b>DOB</b>
+                                </span>
+                                <span style={{ fontSize: "16px" }}>
+                                433t
+                                </span>
+                            </p>
+                            <p className="specific-left-topic">
+                                <span style={{ fontSize: "18px" }}>
+                                <b>Address</b>
+                                </span>
+                                <span style={{ fontSize: "16px" }}>
+                                fqwef
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+              
+               
+                <div className="dashboard-title-line"></div>
+                
+                
+                </div>
+            
+        
                     <div className="dashboard-addbooks-content" style={active !== "addbook" ? { display: 'none' } : {}}>
                         <AddBook />
                     </div>

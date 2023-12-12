@@ -4,8 +4,10 @@ import Signin from "./pages/Signin/Signin";
 import Books from "./pages/Books/Books";
 import MemberDashboard from "./pages/Dashboard/StudentDashboard/StudentDashboard";
 import AdminDashboard from "./pages/Dashboard/AdminDashboard/AdminDashboard";
+import BooksInfo from "./components/BookInfo/BookInfo";
+
 import About from "./pages/About/About";
-//import Contact from "./pages/Contact/contact";
+
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import {useContext} from "react";
@@ -20,6 +22,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
         <Route path="/Books" element={<Books />} />
+        <Route path="/Books/id" element={<BooksInfo/>}/>
         <Route path="/signin" element={user ? (user.isAdmin ? <Navigate replace to='/dashboard@admin'/> : <Navigate replace to='/dashboard@member'/>) : <Signin />} />
         <Route path="/dashboard@member" element={user ? (user.isAdmin ===false ? <MemberDashboard/> : <Navigate replace to='/'/> ):  <Navigate replace to='/'/>} />
         <Route path="/dashboard@admin" element={user ? (user.isAdmin ===true ? <AdminDashboard/> : <Navigate replace to='/'/>):<Navigate replace to='/'/>}/>

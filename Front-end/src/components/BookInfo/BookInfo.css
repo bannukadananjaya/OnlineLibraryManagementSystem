@@ -1,0 +1,222 @@
+.book{
+    /* background-color: rgb(247,235,215); */
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color:wheat;
+}
+
+.book-cover {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 75%;
+    height: fit-content;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    background-color: lightgray;
+    margin: 80px auto;
+    padding: 15px 35px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+}
+
+.book-title{
+    word-wrap: break-word;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+
+.book-data{
+    border: 1px solid red;
+    margin: 60px auto;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px;
+    max-width: 1024px;
+}
+
+.book-img{
+    border: 1px solid red;
+    width: 30%;
+    padding:2%;
+}
+
+.book-img img{
+    border: 1px solid red;
+    width: 100%;
+    
+    height: auto;
+    margin-bottom: 25px!important;
+    border-radius: 18px;
+}
+
+.book-info{
+    justify-self: left;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.book-author{
+    color: rgb(141, 140, 140);
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.book-category{
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: space-between;
+    align-items:center ;
+    /* position: absolute; */
+    bottom: 5%;
+    left: 5%;
+}
+
+.book-category p{
+    padding: 8px 15px;
+    /* background-color: lightgray; */
+    font-weight: 600;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+
+
+.popularbooks{
+    padding: 20px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;	
+    position: relative;
+	display: flex;
+    height: auto;
+}
+
+.popularbooks:hover div{
+    animation-play-state: paused;
+}
+
+.popularbooks-title{
+    margin-top: 50px;
+    position: relative;
+    color: #0E2431;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 32px;
+}
+
+.popular-book:hover{
+    transform: scale(1.15);
+    transition: all ease 0.7s;
+    animation-play-state: paused;
+}
+
+.popularbook-images{
+    animation: marquee 15s linear infinite;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.popular-book{
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 0 1vw;
+    border-radius: 5px;
+}
+
+
+.books{
+    margin: 60px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 15px;
+    max-width: 1024px;
+}
+
+.book-card{
+    display: flex;
+    flex-direction: column;
+    box-sizing: content-box;
+    height: auto;
+    width: 250px;
+    align-items: center;
+    padding: 25px;
+    margin: 10px;
+    -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 15px;
+    position: relative;
+    background-color: rgb(238, 238, 238);
+}
+
+.book-card img{
+    width: 150px;
+    height: auto;
+    margin-bottom: 25px!important;
+    border-radius: 18px;
+}
+
+.book-card img:hover{
+    transform: scale(1.05);
+    transition: all ease 1.3s;
+}
+
+.bookcard-title{
+    word-wrap: break-word;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.bookcard-author{
+    color: rgb(141, 140, 140);
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.bookcard-category{
+    display: flex;
+    flex-wrap: wrap;
+    /* position: absolute; */
+    bottom: 5%;
+    left: 5%;
+}
+
+.bookcard-category p{
+    padding: 8px 15px;
+    /* background-color: lightgray; */
+    font-weight: 600;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.bookcard-emptybox{
+    height: auto;
+    position: relative;
+    bottom: 0%;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 5px;
+}
+/* @keyframes marquee {
+	0%   { transform: translateX(0%); }
+	100% { transform: translateX(-100%); }
+} */

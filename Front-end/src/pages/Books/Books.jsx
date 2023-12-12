@@ -2,6 +2,7 @@
 import "./Books.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 function Allbooks() {
   const API_URL = "http://localhost:3000/";
@@ -13,7 +14,7 @@ function Allbooks() {
       try {
         const response = await axios.get(API_URL + "api/books/allbooks");
         setBooks(response.data);
-        console.log(response);
+        //console.log(response);
       } catch (error) {
         console.error("Error fetching books:", error);
       }
@@ -30,7 +31,7 @@ function Allbooks() {
         // console.log(response);
         // const categories = JSON.parse(response.data);
         // console.log(typeof response.data);
-        console.log(response.data);
+        //console.log(response.data);
         const all_categories = await response.data.map((category) => ({
           value: `${category._id}`,
           text: `${category.categoryName}`,
@@ -59,10 +60,13 @@ function Allbooks() {
           {books.map((book, index) => {
             return (
               <div className="book-card" key={index}>
-                <img
-                  src={`${API_URL}images/${book.image}`}
-                  alt={book.title}
-                ></img>
+                <Link to={`/books/${book._id}`}>
+                  <img
+                    src={`${API_URL}images/${book.image}`}
+                    alt={book.title}
+                  ></img>
+                </Link>
+
                 <p className="bookcard-title">{book.bookName}</p>
                 <p className="bookcard-author">{book.author}</p>
                 <div className="bookcard-category">

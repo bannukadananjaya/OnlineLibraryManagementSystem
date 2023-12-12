@@ -1,7 +1,7 @@
 .dashboard-option-content {
     display: flex;
     flex-direction: column;
-    flex: 0.75;
+    flex: 0.75; */
     width: 80vw;
     overflow-y: scroll;
   }

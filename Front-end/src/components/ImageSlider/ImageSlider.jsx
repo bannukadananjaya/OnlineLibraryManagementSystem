@@ -1,7 +1,6 @@
 //import React from 'react'
 import './ImageSlider.css'
 import { Carousel } from 'react-bootstrap'
-import img1 from '../../assets/images/img slider/img1.jpg'
 import img2 from '../../assets/images/img slider/img2.jpg'
 import img3 from '../../assets/images/img slider/img3.jpg'
 
@@ -10,17 +9,6 @@ function ImageSlider() {
     return (
         <div className='slider'>
             <Carousel>
-                {/* <Carousel.Item interval={1000}>
-                    <img
-                        className='full-height-cover'
-                        src={img1}
-                        alt="First slide"
-                    />
-                    <Carousel.Caption>
-                        {/* <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
-                </Carousel.Item> */}
                 <Carousel.Item interval={500}>
                     <img
                         className="full-height-cover"
