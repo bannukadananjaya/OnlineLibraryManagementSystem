@@ -6,7 +6,7 @@ import BookIcon from '@mui/icons-material/Book';
 
 function Stats() {
     return (
-        <div className='stats'>
+        <div className='stats position-absolute top-50'>
              <div className='stats-block'>
                 <LibraryBooksIcon className='stats-icon' style={{ fontSize:80 }}/>
                 <p className='stats-title'>Total Books</p>

@@ -16,7 +16,7 @@ function ImageSlider() {
                         alt="Second slide"
                     />
                     <Carousel.Caption>
-                        <h3>Discover the World Between the Pages</h3>
+                        <h2>Discover the World Between the Pages</h2>
                         <p>Books hold the power to enlighten, entertain, and inspire. Dive into their embrace and embark on limitless journeys.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
@@ -28,7 +28,7 @@ function ImageSlider() {
                     />
                     <Carousel.Caption>
                         <h3>Where Knowledge Unfolds</h3>
-                        <p>PBooks, the timeless gateway to imagination and wisdom, await to transport you to new worlds and expand your horizons.</p>
+                        <p>Books, the timeless gateway to imagination and wisdom, await to transport you to new worlds and expand your horizons.</p>
                     </Carousel.Caption>
                 </Carousel.Item> 
             </Carousel>

@@ -15,9 +15,9 @@ function Signin() {
     const [error, setError] = useState("")
     const { dispatch } = useContext(AuthContext)
 
-    const api = axios.create({
-        baseURL:'http://192.168.43.219:3000/'
-    })
+    // const api = axios.create({
+    //     baseURL:'http://192.168.43.219:3000/'
+    // })
     //const API_URL = process.env.REACT_APP_API_URL
     
     // const BASE_URL = 'http://localhost:3000/'
@@ -30,7 +30,6 @@ function Signin() {
             // const res = await axios.post("http://192.168.43.219:3000/api/auth/signin", userCredential);
             axios.post("http://localhost:3000/api/auth/signin", userCredential).then(res => {
                 console.log(res.data)
-                console.log('res.data')
                 dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
             }).catch(e => {
                 console.log(e)
