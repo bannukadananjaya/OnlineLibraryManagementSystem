@@ -20,11 +20,11 @@ app.use(cors());
 
 /* API Routes */
 app.use("/images",express.static("images"))
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/books", bookRoutes);
-app.use("/api/transactions", transactionRoutes);
-app.use("/api/categories", categoryRoutes);
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/books", bookRoutes);
+app.use("/transactions", transactionRoutes);
+app.use("/categories", categoryRoutes);
 
 /* MongoDB connection */
 mongoose.connect(

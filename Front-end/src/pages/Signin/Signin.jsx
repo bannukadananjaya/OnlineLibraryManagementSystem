@@ -1,53 +1,27 @@
-// export default Signin
 import{ useContext, useState } from 'react'
 import './Signin.css'
-import axios from 'axios'
 import { AuthContext } from '../../context/AuthContext'
 import Switch from '@mui/material/Switch';
+import { Login } from '../../api/userApi';
 
 function Signin() {
     //default student signin
-    
     const [isStudent, setIsStudent] = useState(true)
+
+    //get input data stored
     const [admissionId, setAdmissionId] = useState()
     const [employeeId,setEmployeeId] = useState()
     const [password, setPassword] = useState()
     const [error, setError] = useState("")
+    
     const { dispatch } = useContext(AuthContext)
 
-    // const api = axios.create({
-    //     baseURL:'http://192.168.43.219:3000/'
-    // })
-    //const API_URL = process.env.REACT_APP_API_URL
-    
-    // const BASE_URL = 'http://localhost:3000/'
-
-    const loginCall = (userCredential, dispatch) => {
-        dispatch({ type: "LOGIN_START" });
-        console.log(userCredential);
-
-        try {
-            // const res = await axios.post("http://192.168.43.219:3000/api/auth/signin", userCredential);
-            axios.post("http://localhost:3000/api/auth/signin", userCredential).then(res => {
-                console.log(res.data)
-                dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-            }).catch(e => {
-                console.log(e)
-            })
-            // console.log('res.data');  
-            // dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-        }
-        catch (err) {
-            dispatch({ type: "LOGIN_FAILURE", payload: err })
-            setError("Wrong Password Or Username")
-        }
-    }
 
     const handleForm = (e) => {
         e.preventDefault()
         isStudent
-        ? loginCall({ admissionId, password }, dispatch)
-        : loginCall({ employeeId,password }, dispatch)
+        ? Login({ admissionId, password }, dispatch)
+        : Login({ employeeId,password }, dispatch)
     }
 
     return (

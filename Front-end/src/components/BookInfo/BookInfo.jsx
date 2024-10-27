@@ -8,7 +8,7 @@ function BookInfo() {
  
   const [data, setData] = useState([]);
   const urlId = useParams();
-  const API_URL = `http://localhost:3000/api/books/getbook/${urlId.id}`;
+  const API_URL = `http://localhost:3000/books/getbook/${urlId.id}`;
 
   useEffect(() => {
     const fetchData = async () => {

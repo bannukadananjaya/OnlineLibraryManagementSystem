@@ -12,7 +12,7 @@ function Allbooks() {
   useEffect(() => {
     const getallBooks = async () => {
       try {
-        const response = await axios.get(API_URL + "api/books/allbooks");
+        const response = await axios.get(API_URL + "books/allbooks");
         setBooks(response.data);
         //console.log(response);
       } catch (error) {

@@ -9,19 +9,54 @@ const INITIAL_STATE = {
     error:false
 }
 
-/* Reads the data from the Provider and changes INITIAL_STATE */
 export const AuthContext = createContext(INITIAL_STATE)
 
-/* Children here are the Components that need to get the data.[In this Application we specified App COmponent as Child in index.js so that we can server every every component exist in the app */
-/* This will provide data to all the children that we are giving here */
-export const AuthContextProvider = ({children}) =>{
+// const AuthReducer = (state, action) => {
+//     switch (action.type) {
+//         case "LOGIN_START":
+//             return {
+//                 user: action.payload,
+//                 isLoading: true,
+//                 error: false
+//             };
+//         case "LOGIN_SUCCESS":
+//             return {
+//                 user: action.payload,
+//                 isLoading: false,
+//                 error: false
+//             };
+//         case "LOGIN_FAILURE":
+//             return {
+//                 user: null,
+//                 isLoading: false,
+//                 error: action.payload
+//             };
+
+//         default:
+//             return state
+//     }
+// }
+export const AuthContextProvider = ({children}) => {
+
+//     const LoginStart = (userCredentials) =>({
+//         type:"LOGIN_START"
+//     });
+//     const LoginSuccess = (user) =>({
+//         type:"LOGIN_SUCCESS",
+//         payload: user
+//     })
+//     const LoginFailure = (error) =>({
+//         type:"LOGIN_FAILURE",
+//         payload: error
+//     })
+
     const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
     useEffect(()=>{
         localStorage.setItem("user", JSON.stringify(state.user))
       },[state.user])
 
-    return (
+    return (       
         <AuthContext.Provider
         value={{
             user:state.user,

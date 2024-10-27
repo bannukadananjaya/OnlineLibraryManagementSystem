@@ -28,7 +28,7 @@ function MemberDashboard() {
     const getMemberDetails = async () => {
       try {
         const response = await axios.get(
-          API_URL + "api/users/getuser/" + user._id
+          API_URL + "users/getuser/" + user._id
         );
         // console.log(response);
         setMemberDetails(response.data);
