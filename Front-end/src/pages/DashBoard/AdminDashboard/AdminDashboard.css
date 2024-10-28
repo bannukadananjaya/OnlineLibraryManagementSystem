@@ -1,5 +1,5 @@
 .dashboard {
-    display: grid;
+    display: grid; 
     place-items: center;
     height: 100vh;
     background-color: wheat;
@@ -14,25 +14,34 @@
     display: flex;
     background-color: #fefaf5;
     border-radius: 15px;
+    overflow:hidden;
+    position: relative;
     -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
       0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
       0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   }
-  
-  /* Sidebar */
-  
-  .dashboard-options {
-    background-color: rgb(24, 33, 62);
-    color: wheat;
-    display: flex;
-    flex-direction: column;
-    flex: 0.25;
-    width: 40vw;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+   
+    /* Sidebar */
+    .sidebar-toggle{
+      z-index: 9;
+
+    }
+    .dashboard-options {
+      background-color: rgb(24, 33, 62);
+      min-width: 250px;
+      height: 100vh;
+      position: absolute;
+      left: -250px; 
+      transition: all 0.5s ease;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
   }
   
+  .dashboard-options.active {
+    left: 0; /* Brings the sidebar on-screen */
+    flex: 0.25; /* Adjusts flex ratio when active */
+  }
   .dashboard-logo {
     margin-top: 50px;
     margin-bottom: 50px !important;
@@ -41,8 +50,7 @@
     font-weight: 800;
     text-align: center;
   }
-  
-  .dashboard-option {
+.dashboard-option {
     text-decoration: none;
     padding: 15px;
     border-bottom: 0.5px solid salmon;
@@ -54,27 +62,38 @@
     align-items: center;
     cursor: pointer;
   }
-  
-  .dashboard-option:hover {
+   
+.dashboard-option:hover {
     color: rgb(234, 68, 74);
     border-left: 5px solid rgb(234, 68, 74);
     transition: all 0.5s ease;
     background-color: #ddd;
   }
   
-  .dashboard-option.clicked {
+.dashboard-option.clicked {
     color: rgb(234, 68, 74);
     border-left: 5px solid rgb(234, 68, 74);
     transition: all 0.5s ease;
     background-color: #ddd;
   }
+
+    /* rightSide */
+
+  .dashboard-options.active +.dashboard-option-content {
+    flex: 0.75; /* Adjusts flex ratio when sidebar is active */
+    margin-left: 250px; 
+  }
+
   
   /* Content of each option in Sidebar */
   
   .dashboard-option-content {
+    /* position: sticky; */
     display: flex;
-    flex: 0.75;
+    flex: 1; 
     width: 80vw;
+    transition: flex 0.5s ease;
+    margin-left: 0;
   }
   
   .dashboard-option-icon {
@@ -144,29 +163,6 @@
       font-size: 20px;
       margin-bottom: 50px !important;
     }
-  
-    /* Sidebar CSS */
-  
-    .dashboard-options {
-      display: none;
-    }
-    .dashboard-options.active {
-      position: relative;
-      width: auto;
-      min-width: 250px;
-      height: 100vh;
-      display: flex;
-      position: fixed;
-      left: 0;
-      transition: all 0.5s ease;
-      z-index: 5;
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
-    }
-    .dashboard-option-content {
-      flex: 1 !important;
-    }
-  }
   
   /* Admin Dashboard Additions */
   

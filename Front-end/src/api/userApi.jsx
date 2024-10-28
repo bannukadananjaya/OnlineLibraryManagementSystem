@@ -2,7 +2,7 @@ import api from "./api";
 
 export const Login = async(userCredentials,dispatch) => {  
     dispatch({type:"LOGIN_START"});
-    console.log(userCredentials);
+    console.log("usercredentials",userCredentials);
     try{
         
         const response = await api.post('/auth/signin',userCredentials);
@@ -18,7 +18,7 @@ export const Login = async(userCredentials,dispatch) => {
 
         console.log(data);
         dispatch({type:"LOGIN_SUCCESS",payload:data})
-        console.log("dispatch",dispatch);
+        
         return { success: true, data:data };
     }catch(err){
         console.log(err)

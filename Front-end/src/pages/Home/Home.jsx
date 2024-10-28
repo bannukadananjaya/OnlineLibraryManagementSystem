@@ -4,7 +4,7 @@ import WelcomeBox from "../../components/WelcomeBox/WelcomeBox";
 import Stats from "../../components/Stats/Stats";
 import News from '../../components/News/News'
 //import PhotoGallery from '../../Components/PhotoGallery/PhotoGalary'
-import PopularBooks from '../../Components/PopularBooks/PopularBooks'
+// import PopularBooks from '../../Components/PopularBooks/PopularBooks'
 import RecentAddedBooks from '../../Components/RecentBooks/RecentBooks'
 import ReservedBooks from '../../Components/ReservedBooks/ReservedBooks'
 import Categories from "../../components/categories/Categories";
@@ -16,11 +16,10 @@ function Home() {
       <WelcomeBox/>
       <Stats/>
       <Categories/>
-      <PopularBooks/>
+      {/* <PopularBooks/> */}
       <RecentAddedBooks/>
       <ReservedBooks/>
       <News/>
-      {/*<PhotoGallery/> */}
     </div>
   );
 }

@@ -45,7 +45,11 @@ const BookSchema = new mongoose.Schema({
     transactions:[{
         type:mongoose.Types.ObjectId,
         ref:"BookTransaction"
-    }]
+    }],
+    likes:{
+        type:Number,
+        default:0
+    }
 },
 {
     timestamps:true

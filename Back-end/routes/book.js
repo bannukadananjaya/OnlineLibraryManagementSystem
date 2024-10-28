@@ -38,6 +38,25 @@ router.get("/", async (req, res) => {
     }
 })
 
+router.get('/popularBooks', async (req,res)=>{
+   try{
+        console.log("first");
+        const popularBooks = await Book.find()
+            .sort({likes:-1})
+            .limit(10);
+
+        if (!popularBooks){
+            console.log("NO books");
+            res.status(404).json({success:false,message:"No books"})        
+        }
+
+        console.log("Books retrived");
+        res.status(200).json({success:true,message:"Bokks retrived",popularBooks})    
+   }catch(err){
+    console.log(err);
+   }
+})
+
 /* Adding book */
 router.post("/addbook", async (req, res) => {
     if (req.body.isAdmin) {

@@ -1,17 +1,16 @@
 //import React from 'react'
 import "./PopularBooks.css";
-import axios from "axios";
+import api from "../../api/api";
 import { useEffect, useState } from "react";
 
 const PopularBooks = () => {
-  const API_URL = "http://localhost:3000/";
   const [books, setBooks] = useState();
-  const [allCategories, setAllCategories] = useState([]);
+  // const [allCategories, setAllCategories] = useState([]);
 
   useEffect(() => {
-    const getallBooks = async () => {
+    const getPopularBooks = async () => {
       try {
-        const response = await axios.get(API_URL + "api/books/allbooks");
+        const response = await api.get( + "/books/popularBooks");
 
         setBooks(response.data);
         console.log(response);
@@ -19,33 +18,33 @@ const PopularBooks = () => {
         console.error("Error fetching books:", error);
       }
     };
-    getallBooks();
-  }, [API_URL]);
+    getPopularBooks();
+  }, []);
 
-  useEffect(() => {
-    const getAllCategories = async () => {
-      try {
-        const response = await axios.get(
-          API_URL + "api/categories/allcategories"
-        );
-        // console.log(response);
-        // const categories = JSON.parse(response.data);
-        // console.log(typeof response.data);
-        console.log(response.data);
-        const all_categories = await response.data.map((category) => ({
-          value: `${category._id}`,
-          text: `${category.categoryName}`,
-        }));
-        setAllCategories(all_categories);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getAllCategories();
-  }, [API_URL]);
+  // useEffect(() => {
+  //   const getAllCategories = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         API_URL + "api/categories/allcategories"
+  //       );
+  //       // console.log(response);
+  //       // const categories = JSON.parse(response.data);
+  //       // console.log(typeof response.data);
+  //       console.log(response.data);
+  //       const all_categories = await response.data.map((category) => ({
+  //         value: `${category._id}`,
+  //         text: `${category.categoryName}`,
+  //       }));
+  //       setAllCategories(all_categories);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getAllCategories();
+  // }, [API_URL]);
 
 if(!books)
-  return null
+  return <p>Loading</p>
 if(books)
   return (
     <div className="popularbooks-container">
@@ -55,7 +54,8 @@ if(books)
           return (
             <div className="book-card" key={index}>
               <img
-                src={`${API_URL}images/${book.image}`}
+                // src={`${API_URL}images/${book.image}`}
+                src={`${book.image}`}
                 alt={book.title}
               ></img>
               <p className="bookcard-title">{book.bookName}</p>
