@@ -26,7 +26,7 @@ export const BookContextProvider= (props) => {
     
             for (const category of categories) {
                 try {
-                    const response = await api.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=30&key=AIzaSyBjsOIW-kXOn_QvOww1uXIDZ9vAMm9e2Xc`);
+                    const response = await api.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=30&key=${process.env.API_KEY}`);
                     
                     if (response.status !== 200) {
                         console.log("Error getting data");
