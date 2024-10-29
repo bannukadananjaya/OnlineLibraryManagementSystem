@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState,useMemo, useContext } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import api from '../api/api';
 
@@ -14,8 +14,8 @@ export const BookContextProvider= (props) => {
     const [error,setError] = useState('');
     // const [categories,setCategories] = useState([]);
     // const categories = useMemo(() => ["Fiction", "Science", "Technology", "Art", "History"], []);
-    const categories = ['Romance','Science Fiction','Adventure']
-
+    // const categories = ['Romance','Science Fiction','Adventure']
+    const categories = ['Romance','Science Fiction','Adventure','Fantasy','Biography']
     
     useEffect(() => {
         // const categories = ['Romance','Science Fiction','Adventure','Fantasy','Biography']
@@ -26,7 +26,7 @@ export const BookContextProvider= (props) => {
     
             for (const category of categories) {
                 try {
-                    const response = await api.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=30&key=AIzaSyBjsOIW-kXOn_QvOww1uXIDZ9vAMm9e2Xc`);
+                    const response = await api.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=30&key=${process.env.API_KEY}`);
                     
                     if (response.status !== 200) {
                         console.log("Error getting data");
@@ -59,7 +59,7 @@ export const BookContextProvider= (props) => {
     }, []); // Add categories to the dependency array if it's defined outside the effect
     
 
-    const context = {books,loading} 
+    const context = {books,categories,loading} 
 
     return(
         <BookContext.Provider value={context}>

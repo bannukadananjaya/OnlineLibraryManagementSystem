@@ -15,11 +15,11 @@ function Home() {
       <ImageSlider/>
       <WelcomeBox/>
       <Stats/>
-      <Categories/>
+      {/* <Categories/> */}
       {/* <PopularBooks/> */}
-      <RecentAddedBooks/>
-      <ReservedBooks/>
-      <News/>
+      {/* <RecentAddedBooks/> */}
+      {/* <ReservedBooks/> */}
+      {/* <News/> */}
     </div>
   );
 }
