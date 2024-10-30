@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState, useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import api from '../api/api';
-
+// import api_key from ''
+const api_key = import.meta.env.VITE_API_KEY
 
 
 export const BookContext = createContext(null);
@@ -20,13 +21,13 @@ export const BookContextProvider= (props) => {
     useEffect(() => {
         // const categories = ['Romance','Science Fiction','Adventure','Fantasy','Biography']
 
-        const getBooks = async () => {
+        const getBooksByGoogleAPI = async () => {
             setLoading(true);
             const allBooks = [];
     
             for (const category of categories) {
                 try {
-                    const response = await api.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=30&key=${process.env.API_KEY}`);
+                    const response = await api.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&maxResults=30&key=${api_key}`);
                     
                     if (response.status !== 200) {
                         console.log("Error getting data");
@@ -53,8 +54,18 @@ export const BookContextProvider= (props) => {
             console.log("All fetched books:", allBooks);
             setLoading(false);
         }
+
+        const getBooksByDatabase = async() => {
+            try{
+                const response = await api.get('/books');
+
+            }catch(err){
+                console.log(err);
+            }
+        }
     
-        getBooks();
+        // getBooksByGoogleAPI();
+        getBooksByDatabase();
     
     }, []); // Add categories to the dependency array if it's defined outside the effect
     

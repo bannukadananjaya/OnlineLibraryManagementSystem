@@ -1,7 +1,6 @@
-//import React from 'react' in the updated version of react no need to import react
+import {useState,useContext} from 'react'
+import { AuthContext } from '../../context/AuthContext'
 
-import {useState} from 'react'
-//Navigation links call
 import { Link } from 'react-router-dom' 
 import './Header.css'
 
@@ -10,8 +9,8 @@ import ClearIcon from '@mui/icons-material/Clear'
 
 
 const Header = () => {
-    //this is for toggle button
-    //const[variable, function]
+ 
+    const {user} =useContext(AuthContext);
     const [menutoggle, setMenutoggle] = useState(false)
 
     const Toggle = () => {
@@ -48,11 +47,13 @@ const Header = () => {
                         <a href="#about">About</a>
                         </Link>
                     </li>
+                    {(user==null)?
                     <li className="option" onClick={() => { closeMenu() }}>
-                        <Link to='/signin'>
-                        <a href='signin'>SignIn</a>
-                        </Link>
-                    </li>
+                    <Link to='/signin'>
+                    <a href='signin'>SignIn</a>
+                    </Link>
+                </li>:<></>}
+                    
                 </ul>
             </div>
 

@@ -1,26 +1,76 @@
 import "./Books.css";
-import { useContext } from "react";
+import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import { BookContext } from "../../context/BookContext";
+// import { BookContext } from "../../context/BookContext";
 import api from "../../api/api";
+import BookCard from "./BookCard";
 
 function Allbooks(props) {
 
-  const {books,categories} = useContext(BookContext);
+  // const {books,categories} = useContext(BookContext);
+  const [books,setBooks] = useState([]);
+  const [categories,setCategories] = useState([]);
+  const [state,setState] = useState('all');
 
-  console.log("categories",books)
-  console.log("Books",books)
-
-  
-  const handleLike = async () => {
-    const response = api.put('books/like/:id');
-    const data = response.data;
-
-    if(response.status!==200){
-      console.log("error",data);
+  useEffect(()=>{
+    //fetch categories
+    const getCategories = async () => {
+      try{
+        const response = await api.get('/categories');
+        const data = await response.data;
+       
+        if(response.status !== 200){
+          console.log("error getting data",data);
+        }
+        console.log("Get data _",data);
+        setCategories(data);
+      }catch(err){
+        console.log(err)
+      }
+      console.log(categories)
+      
     }
-    console.log("Success",data);
-  }
+    //
+    const getBooks = async() =>{
+      try{
+        // if(state === 'all'){
+        const response = await api.get(state==='all'?'/books':`/books/${state}`);
+        const data = await response.data;
+        if(response.status !== 200){
+          console.log("error getting data",data);
+        }
+        console.log("Get data",data);
+        setBooks(data);
+    
+        // }else{
+        //   const response = await api.get(`/books/${state}`);
+        //   const data = await response.data;
+        //   if(response.status !== 200){
+        //     console.log("error getting data",data);
+        //   }
+        //   console.log("Get data",data);
+        //   setBooks(data);
+        // }
+      }
+      catch(err){
+        console.log(err)
+      }
+      
+    }
+    getCategories();
+    getBooks();
+    
+  },[state])
+  
+  // const handleLike = async () => {
+  //   const response = api.put('books/like/:id');
+  //   const data = response.data;
+
+  //   if(response.status!==200){
+  //     console.log("error",data);
+  //   }
+  //   console.log("Success",data);
+  // }
 
 
   if (!books) return <p>Loading</p>;
@@ -29,34 +79,24 @@ function Allbooks(props) {
       <div className="books-page">
         {/* sideBar */}
         <div className="categories">
-          {categories.map((item,i)=>{
-            return <div key={i} className="category-item"><Link to={`/Books/${item}`}>{item}</Link></div>
-          })}
+          {categories.map((item,i)=>(
+            <div key={i} className="category-item">
+              <Link to={`/Books/${item.categoryName}`} onClick={()=>setState(item.categoryName)}>{item.categoryName}</Link>
+            </div>
+          ))}
         </div>
 
         {/* rightside */}
         <div className="books1">
-            {books.map((item, i) => {
-              if(!props.category || props.category === item.category)
-              return (
-                <div key={i} className="books2">
-                   { item.books.map((book, j) => (
-                        <div className="book-card" key={j}>
-                            <Link to={`/books/${book.id}`}>
-                                <img
-                                    src={book.volumeInfo.imageLinks?.thumbnail}
-                                    alt={book.volumeInfo.title}
-                                />
-                            </Link>
-                            <i className="fa-solid fa-heart" onClick={handleLike}></i>
-                            <p className="bookcard-title">{book.volumeInfo.title}</p>
-                            <p className="bookcard-author">{book.volumeInfo.authors?.join(', ')}</p>
-                            <div className="bookcard-emptybox">{book.bookStatus}</div>
-                        </ div>
-                    ))}  
-                </div>
-              )
-            })} 
+            {books.map((item, i) => (
+              // if(!props.category || props.category === item.category ? setState(item.category):setState('all'))
+              // return (
+                // <div key={i} className="books2">
+                //    { item.map((book, j) => (
+                        <BookCard props={item} key={i}/>
+                //     ))}  
+                // </div>
+              ))} 
         </div>
       </div>
     );

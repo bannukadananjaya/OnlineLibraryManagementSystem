@@ -1,36 +1,27 @@
 import mongoose from "mongoose"
 
 const BookTransactionSchema = new mongoose.Schema({
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
+        require:true
+    },
     bookId: {
-        type: String,
-        require: true
-    },
-    borrowerId: { //EmployeeId or AdmissionId
-        type: String,
-        require: true
-    },
-    bookName: {
-        type: String,
-        require: true
-    },
-    borrowerName: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Book',
         require: true
     },
     transactionType: { //Issue or Reservation
         type: String,
         require: true,
     },
-    fromDate: {
-        type: String,
-        require: true,
-    },
-    toDate: {
+    issueDate: {
         type: String,
         require: true,
     },
     returnDate: {
-        type: String
+        type: String,
+        require: true,
     },
     transactionStatus: {
         type: String,

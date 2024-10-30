@@ -5,9 +5,11 @@ import BookCategory from "../models/BookCategory.js"
 const router = express.Router()
 
 /* Get all books in the db */
-router.get("/allbooks", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const books = await Book.find({}).populate("transactions").sort({ _id: -1 })
+        const books = await Book.find({})
+                                .populate("transactions")
+                                .sort({ _id: -1 })
         res.status(200).json(books)
     }
     catch (err) {
@@ -16,9 +18,10 @@ router.get("/allbooks", async (req, res) => {
 })
 
 /* Get Book by book Id */
-router.get("/getbook/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id).populate("transactions")
+        const book = await Book.findById(req.params.id)
+                                .populate("transactions")
         res.json(book)
     }
     catch(err) {
@@ -27,10 +30,11 @@ router.get("/getbook/:id", async (req, res) => {
 })
 
 /* Get books by category name*/
-router.get("/", async (req, res) => {
-    const category = req.query.category
+router.get("/:category", async (req, res) => {
+    const category = req.query.category;
     try {
-        const books = await BookCategory.findOne({ categoryName: category }).populate("books")
+        const books = await Book.findOne({ category: category })
+                                .populate("transactions")
         res.status(200).json(books)
     }
     catch (err) {
@@ -40,7 +44,7 @@ router.get("/", async (req, res) => {
 
 router.get('/popularBooks', async (req,res)=>{
    try{
-        console.log("first");
+        console.log("popularBooks");
         const popularBooks = await Book.find()
             .sort({likes:-1})
             .limit(10);
@@ -57,6 +61,7 @@ router.get('/popularBooks', async (req,res)=>{
    }
 })
 
+// Admin pannel
 /* Adding book */
 router.post("/addbook", async (req, res) => {
     if (req.body.isAdmin) {
@@ -86,7 +91,7 @@ router.post("/addbook", async (req, res) => {
     }
 })
 
-/* Addding book */
+/* update book */
 router.put("/updatebook/:id", async (req, res) => {
     if (req.body.isAdmin) {
         try {

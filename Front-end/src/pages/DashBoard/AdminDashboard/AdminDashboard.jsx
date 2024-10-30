@@ -26,7 +26,7 @@ function AdminDashboard() {
 
     const { user} = useContext(AuthContext);
     const [active, setActive] = useState("profile")
-    const [sidebar, setSidebar] = useState(false)
+    const [sidebar, setSidebar] = useState(true)
 
     /* Logout Function*/
     const logout = () => {
@@ -39,11 +39,11 @@ function AdminDashboard() {
     return (
         <div className="dashboard">
             <div className="dashboard-card">
-                <div className="sidebar-toggle" onClick={() => setSidebar(!sidebar)}> 
+                {/* <div className="sidebar-toggle" onClick={() => setSidebar(!sidebar)}> 
                     <IconButton>
                         {sidebar ? <CloseIcon style={{ fontSize: 25, color: "rgb(234, 68, 74)"}} /> : <DoubleArrowIcon style={{ fontSize: 25, color: "rgb(234, 68, 74)" }} />}
                     </IconButton>
-                </div>
+                </div> */}
 
                 {/* Sidebar */}
                 <div className={sidebar ? "dashboard-options active" : "dashboard-options"}>

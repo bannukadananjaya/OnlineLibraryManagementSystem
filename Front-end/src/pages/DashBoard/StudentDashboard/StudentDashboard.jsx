@@ -13,43 +13,38 @@ import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import IconButton from "@mui/material/IconButton";
 
 import { AuthContext } from "../../../context/AuthContext";
-import axios from "axios";
+import api from "../../../api/api";
 import moment from "moment";
 
 function MemberDashboard() {
-  const [active, setActive] = useState("profile");
-  const [sidebar, setSidebar] = useState(false);
-
-  const API_URL = "http://localhost:3000/";
   const { user } = useContext(AuthContext);
+
+  const [active, setActive] = useState("profile");
+  const [sidebar, setSidebar] = useState(true);
   const [memberDetails, setMemberDetails] = useState(null);
 
   useEffect(() => {
     const getMemberDetails = async () => {
       try {
-        const response = await axios.get(
-          API_URL + "users/getuser/" + user._id
-        );
-        // console.log(response);
+        const response = await api.get("users/getuser/" + user.id);
         setMemberDetails(response.data);
-        // console.log(response.data);
       } catch (err) {
         console.log("Error in fetching the member details");
       }
     };
     getMemberDetails();
-  }, [API_URL, user]);
+  }, [user]);
 
   const logout = () => {
     localStorage.removeItem("user");
-    window.location.reload();
+    window.location.reload();//reload current window
   };
 
   return (
     <div className="dashboard">
       <div className="dashboard-card">
-        <div className="sidebar-toggler" onClick={() => setSidebar(!sidebar)}>
-          <IconButton>
+        {/*<div className="sidebar-toggler" onClick={() => setSidebar(!sidebar)}>
+           <IconButton>
             {sidebar ? (
               <CloseIcon style={{ fontSize: 25, color: "rgb(234, 68, 74)" }} />
             ) : (
@@ -57,8 +52,8 @@ function MemberDashboard() {
                 style={{ fontSize: 25, color: "rgb(234, 68, 74)" }}
               />
             )}
-          </IconButton>
-        </div>
+          </IconButton> 
+        </div>*/}
         <div
           className={sidebar ? "dashboard-options active" : "dashboard-options"}
         >
@@ -73,7 +68,7 @@ function MemberDashboard() {
             }`}
             onClick={() => {
               setActive("profile");
-              setSidebar(false);
+              // setSidebar(false);
             }}
           >
             <AccountCircleIcon className="dashboard-option-icon" /> Profile
@@ -85,7 +80,7 @@ function MemberDashboard() {
             }`}
             onClick={() => {
               setActive("active");
-              setSidebar(false);
+              // setSidebar(false);
             }}
           >
             <LocalLibraryIcon className="dashboard-option-icon" /> Active
@@ -97,7 +92,7 @@ function MemberDashboard() {
             }`}
             onClick={() => {
               setActive("reserved");
-              setSidebar(false);
+              // setSidebar(false);
             }}
           >
             <BookIcon className="dashboard-option-icon" /> Reserved
@@ -109,7 +104,7 @@ function MemberDashboard() {
             }`}
             onClick={() => {
               setActive("history");
-              setSidebar(false);
+              // setSidebar(false);
             }}
           >
             <HistoryIcon className="dashboard-option-icon" /> History
@@ -121,7 +116,7 @@ function MemberDashboard() {
             }`}
             onClick={() => {
               logout();
-              setSidebar(false);
+              // setSidebar(false);
             }}
           >
             <PowerSettingsNewIcon className="dashboard-option-icon" /> Log out{" "}
