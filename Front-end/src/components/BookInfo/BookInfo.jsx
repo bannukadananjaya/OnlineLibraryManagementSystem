@@ -1,61 +1,58 @@
 // import React from 'react'
 import "./BookInfo.css";
-import axios from "axios";
+import api from "../../api/api";
 import {useState,useEffect} from "react"
 import { useParams } from 'react-router-dom';
 
 function BookInfo() {
  
-  const [data, setData] = useState([]);
-  const urlId = useParams();
-  const API_URL = `http://localhost:3000/books/getbook/${urlId.id}`;
+  const [book, setBook] = useState([]);
+  const bookId = useParams();
+  // const API_URL = `http://localhost:3000/books/getbook/${urlId.id}`;
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getBook = async () => {
       try {
-        console.log(urlId);
-        const response = await axios.get(API_URL);
+        console.log(bookId);
+        const response = await api.get(`/books/${bookId}`);
 
-        if(!response.ok){
+        if(response.status!==200){
           throw new Error("Failed to fetch data");
         }
-        const jsonData = await response.json();
-        setData(jsonData);
-        console.log(response);
+        const data = await response.data;
+        setBook(data);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchData();
-  }, [API_URL,urlId]);
+    getBook();
+  }, [bookId]);
 
-  if (!data) return null;
-  if (data)
+  if (!book) return <p>Loading</p>;
+  if (book)
   return (
-    <>
-    <pre>{JSON.stringify(data.null,2)}</pre>
-    </>
-    // <div className="book">
-    //   <div className="book-cover">
-    //     <h className="book-title">Harvest Good</h>
-    //     <div className="book-data">
-    //       <div className="book-img">
-    //         <img src={`http://localhost:3000/images/Book_673.jpg`} alt="" width='100%' />
-    //       </div>
-    //       <div className="book-info">
-    //         <p className="book-author">viesvun vvjoi</p>
+    <div className="book">
+      <div className="book-cover">
+        <h className="book-title">Harvest Good</h>
+        <div className="book-data">
+          <div className="book-img">
+            <img src={`http://localhost:3000/images/Book_673.jpg`} alt="" width='100%' />
+          </div>
+          <div className="book-info">
+            <p className="book-author">viesvun vvjoi</p>
 
-    //         <div className="book-category">
-    //           <p>vearvrvaf</p>
-    //         </div>
-    //         <div className="bookcard-emptybox">Akjnjfnaj</div>
-    //         <div className="bookcard-details">
-    //           fiwjoiejfweifjiowev rvwrvivmividv vv edwewew
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+            <div className="book-category">
+              <p>vearvrvaf</p>
+            </div>
+            <div className="bookcard-emptybox">Akjnjfnaj</div>
+            <div className="bookcard-details">
+              fiwjoiejfweifjiowev rvwrvivmividv vv edwewew
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

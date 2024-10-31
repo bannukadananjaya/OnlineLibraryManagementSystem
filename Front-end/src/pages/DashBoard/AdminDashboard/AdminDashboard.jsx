@@ -26,7 +26,7 @@ function AdminDashboard() {
 
     const { user} = useContext(AuthContext);
     const [active, setActive] = useState("profile")
-    const [sidebar, setSidebar] = useState(false)
+    const [sidebar, setSidebar] = useState(true)
 
     /* Logout Function*/
     const logout = () => {
@@ -39,11 +39,11 @@ function AdminDashboard() {
     return (
         <div className="dashboard">
             <div className="dashboard-card">
-                <div className="sidebar-toggle" onClick={() => setSidebar(!sidebar)}> 
+                {/* <div className="sidebar-toggle" onClick={() => setSidebar(!sidebar)}> 
                     <IconButton>
                         {sidebar ? <CloseIcon style={{ fontSize: 25, color: "rgb(234, 68, 74)"}} /> : <DoubleArrowIcon style={{ fontSize: 25, color: "rgb(234, 68, 74)" }} />}
                     </IconButton>
-                </div>
+                </div> */}
 
                 {/* Sidebar */}
                 <div className={sidebar ? "dashboard-options active" : "dashboard-options"}>
@@ -52,11 +52,11 @@ function AdminDashboard() {
                         <p className="logo-name">ADMIN</p>
                     </div>
                     <p className={`dashboard-option ${active === "active" ? "clicked" : ""}`} onClick={() => { setActive("profile"); }}><AccountCircleIcon className='dashboard-option-icon' /> Profile</p> 
-                    <p className={`dashboard-option ${active === "addbook" ? "clicked" : ""}`} onClick={() => { setActive("addbook"); setSidebar(false) }}><BookIcon className='dashboard-option-icon' />Add Book</p>
-                    <p className={`dashboard-option ${active === "addtransaction" ? "clicked" : ""}`} onClick={() => { setActive("addtransaction"); setSidebar(false) }}><ReceiptIcon className='dashboard-option-icon' /> Add Transaction </p>
-                    <p className={`dashboard-option ${active === "getmember" ? "clicked" : ""}`} onClick={() => { setActive("getmember"); setSidebar(false) }}><AccountBoxIcon className='dashboard-option-icon' /> Get Member </p>
-                    <p className={`dashboard-option ${active === "addmember" ? "clicked" : ""}`} onClick={() => { setActive("addmember"); setSidebar(false) }}><PersonAddIcon className='dashboard-option-icon' /> Add Member </p>
-                    <p className={`dashboard-option ${active === "returntransaction" ? "clicked" : ""}`} onClick={() => { setActive("returntransaction"); setSidebar(false) }}><AssignmentReturnIcon className='dashboard-option-icon' /> Return </p>
+                    <p className={`dashboard-option ${active === "addbook" ? "clicked" : ""}`} onClick={() => { setActive("addbook"); setSidebar(true) }}><BookIcon className='dashboard-option-icon' />Add Book</p>
+                    <p className={`dashboard-option ${active === "addtransaction" ? "clicked" : ""}`} onClick={() => { setActive("addtransaction"); setSidebar(true) }}><ReceiptIcon className='dashboard-option-icon' /> Add Transaction </p>
+                    <p className={`dashboard-option ${active === "getmember" ? "clicked" : ""}`} onClick={() => { setActive("getmember"); setSidebar(true) }}><AccountBoxIcon className='dashboard-option-icon' /> Get Member </p>
+                    <p className={`dashboard-option ${active === "addmember" ? "clicked" : ""}`} onClick={() => { setActive("addmember"); setSidebar(true) }}><PersonAddIcon className='dashboard-option-icon' /> Add Member </p>
+                    <p className={`dashboard-option ${active === "returntransaction" ? "clicked" : ""}`} onClick={() => { setActive("returntransaction"); setSidebar(true) }}><AssignmentReturnIcon className='dashboard-option-icon' /> Return </p>
                     <p className={`dashboard-option`} onClick={logout}><PowerSettingsNewIcon className='dashboard-option-icon' /> Log out </p>
 
                 </div>

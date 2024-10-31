@@ -11,10 +11,7 @@ import {BookContextProvider} from './context/BookContext.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <BookContextProvider>
       <App />
-      </BookContextProvider>
-    
     </AuthContextProvider>
   </React.StrictMode>,
 )

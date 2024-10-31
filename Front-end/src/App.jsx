@@ -13,7 +13,10 @@ import {useContext} from "react";
 import { AuthContext } from "./context/AuthContext"; 
 
 function App() {
-  const { user } = useContext(AuthContext)
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
   return (
     <Router>
       <>
@@ -22,11 +25,17 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
         <Route path="/Books" element={<Books />} />
+        <Route path="/Books/mystery" element={<Books category="Mystery"/>} />
+        <Route path="/Books/fantasy" element={<Books category="Fantasy"/>} />
+        <Route path="/Books/science fiction" element={<Books category="Science Fiction"/>} />
+        {/* <Route path="/Books" element={<Books />} /> */}
+
         <Route path="/Books/id" element={<BooksInfo/>}/>
-        <Route path="/signin" element={user ? (user.isAdmin ? <Navigate replace to='/dashboard@admin'/> : <Navigate replace to='/dashboard@member'/>) : <Signin />} />
+
+        <Route path="/signin" element={ user ? (user.isAdmin ? <Navigate replace to='/dashboard@admin'/> : <Navigate replace to='/dashboard@member'/>) : <Signin />} />
         <Route path="/dashboard@member" element={user ? (user.isAdmin ===false ? <MemberDashboard/> : <Navigate replace to='/'/> ):  <Navigate replace to='/'/>} />
         <Route path="/dashboard@admin" element={user ? (user.isAdmin ===true ? <AdminDashboard/> : <Navigate replace to='/'/>):<Navigate replace to='/'/>}/>
-        <Route path="/dashboard@admin" element={<AdminDashboard />} />
+        {/* <Route path="/dashboard@admin" element={<AdminDashboard />} /> */}
 
         {/* <Route path={user ? (user.isAdmin ? '/dashboard@admin' : '/dashboard@member') : '/Signin'} element={<Signin />} /> */}
         

@@ -1,36 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .books-page{
-    /* height: 100vh; */
+    height: 100vh;
     width: 100vw;
     background-color: wheat;
+    display: flex;
+    margin-top: 3rem;
 }
 
-.books{
-    margin: 60px auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 15px;
-    max-width: 1024px;
+.categories{
+    flex: 0.2;
+    flex-direction: column;
+    /* margin: 3rem auto; */
+    justify-content: start;
+    align-items: start;
+    /* margin-top: 2rem;
+    margin-left: 2rem; */
+    padding: 2rem 2rem;
+    background-color: rgb(24, 33, 62);
+    color: #fff;
+    min-width: 200px;
+}
+.category-item{
+    padding: .4rem;
+    margin-top:2rem ;
+    background-color: #fff ;
+    border-radius: 5px;
+    color:rgb(24, 33, 62);
+    width: 100%;
 }
 
+/* .books1{
+    border: 1px solid red;
+    margin: 2rem auto;
+    flex: 0.8;
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1rem; 
+    padding: 15px; 
+} */
+.books1 {
+    border: 1px solid red;
+    margin: 2rem auto;
+    flex: 0.8;
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: 1rem; 
+    padding: 15px; 
+    height: 200px;
+}
+
+
+.books2{
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* 4 columns */
+}
 .book-card{
     display: flex;
     flex-direction: column;
     box-sizing: content-box;
-    height: auto;
-    width: 250px;
+    height: auto; 
+    width: 230px; 
     align-items: center;
-    padding: 25px;
-    margin: 10px;
+    /* padding: 25px; */
+    /* margin: 10px; */
     -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     border-radius: 15px;
-    position: relative;
+    /* position: relative; */
     background-color: rgb(238, 238, 238);
 }
 
 .book-card img{
-    width: 150px;
+    width: 250px;
     height: auto;
     margin-bottom: 25px!important;
     border-radius: 18px;
