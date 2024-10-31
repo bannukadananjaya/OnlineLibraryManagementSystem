@@ -17,6 +17,27 @@ function AddBook() {
    
     const [recentAddedBooks, setRecentAddedBooks] = useState([])
 
+    useEffect(()=>{
+
+        const getRecentBooks = async()=>{
+            try{    
+                const respose = await api.get('/recentBooks');
+
+                const responseData = respose.data;
+
+                if(respose.status===200){
+                    console.log("Get recent Books");
+                    setRecentAddedBooks(responseData);
+                }
+                console.log("Error geting recent books")
+            }catch(err){
+                console.log(err);
+            }
+        }
+        getRecentBooks();
+
+    },[])
+
 
     /* Adding book function */
     const addBook = async (e) => {
@@ -24,7 +45,10 @@ function AddBook() {
         setIsLoading(true)
       
         try {
-            const response = await api.post("/books/addbook", data)
+            const response = await api.post("/books/addbook", {
+                isAdmin:user.isAdmin,
+                ...data
+            })
             if (recentAddedBooks.length >= 5) {
                 recentAddedBooks.splice(-1)
             }

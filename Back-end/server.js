@@ -6,7 +6,7 @@ import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
 import bookRoutes from './routes/book.js';
 import transactionRoutes from "./routes/transactions.js";
-import categoryRoutes from './routes/cartegory.js';
+import categoryRoutes from './routes/category.js';
 // import images from './images/books';
 
 /* App Config */

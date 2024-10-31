@@ -25,9 +25,9 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
         <Route path="/Books" element={<Books />} />
-        <Route path="/Books/romance" element={<Books category="Romance"/>} />
+        <Route path="/Books/mystery" element={<Books category="Mystery"/>} />
+        <Route path="/Books/fantasy" element={<Books category="Fantasy"/>} />
         <Route path="/Books/science fiction" element={<Books category="Science Fiction"/>} />
-        <Route path="/Books/adventure" element={<Books category="Adventure"/>} />
         {/* <Route path="/Books" element={<Books />} /> */}
 
         <Route path="/Books/id" element={<BooksInfo/>}/>

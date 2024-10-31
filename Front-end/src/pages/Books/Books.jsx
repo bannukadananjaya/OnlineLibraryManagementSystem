@@ -11,6 +11,7 @@ function Allbooks(props) {
   const [books,setBooks] = useState([]);
   const [categories,setCategories] = useState([]);
   const [state,setState] = useState('all');
+  console.log("state",state)
 
   useEffect(()=>{
     //fetch categories
@@ -34,7 +35,8 @@ function Allbooks(props) {
     const getBooks = async() =>{
       try{
         // if(state === 'all'){
-        const response = await api.get(state==='all'?'/books':`/books/${state}`);
+        const response = await api.get(state==='all'?'/books':`/books/category/${state}`);
+        console.log(`/books/${state}`);
         const data = await response.data;
         if(response.status !== 200){
           console.log("error getting data",data);
@@ -59,6 +61,7 @@ function Allbooks(props) {
     }
     getCategories();
     getBooks();
+    console.log("run")
     
   },[state])
   
