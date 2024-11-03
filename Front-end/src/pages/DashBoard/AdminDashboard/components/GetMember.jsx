@@ -4,11 +4,9 @@ import axios from "axios"
 import { Dropdown } from 'semantic-ui-react'
 import '../../StudentDashboard/StudentDashboard.css'
 import moment from "moment"
+import api from '../../../../api/api'
 
 function GetMember() {
-
-    const API_URL = 'http://localhost:3000/'
-
     const [allMembersOptions, setAllMembersOptions] = useState(null)
     const [memberId, setMemberId] = useState(null)
     const [memberDetails, setMemberDetails] = useState(null)
@@ -17,7 +15,7 @@ function GetMember() {
     useEffect(() => {
         const getMembers = async () => {
             try {
-                const response = await axios.get(API_URL + "api/users/allmembers")
+                const response = await api.get('/users/allmembers')
                 // console.log("jbabjhc cashmba cmsb acsdba sc")
                 console.log(response)
 
@@ -30,14 +28,14 @@ function GetMember() {
             }
         }
         getMembers()
-    }, [API_URL])
+    }, [])
 
 
     useEffect(() => {
         const getMemberDetails = async () => {
             if(memberId !== null){
                 try {
-                    const response = await axios.get(API_URL + "api/users/getuser/" + memberId)
+                    const response = await api.get("/users/getuser/" + memberId)
                     setMemberDetails(response.data)
                 }
                 catch (err) {
@@ -46,7 +44,7 @@ function GetMember() {
             }
         }
         getMemberDetails()
-    }, [API_URL, memberId])
+    }, [memberId])
 
 
     return (

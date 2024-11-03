@@ -49,10 +49,11 @@ const Header = () => {
                     </li>
                     {(user==null)?
                     <li className="option" onClick={() => { closeMenu() }}>
-                    <Link to='/signin'>
-                    <a href='signin'>SignIn</a>
-                    </Link>
-                </li>:<></>}
+                        <Link to='/signin'>SignIn</Link>
+                    </li>:<>
+                    <li className="option" onClick={() => { closeMenu() }}>
+                        <Link to='/signin'>Profile</Link>
+                    </li></>}
                     
                 </ul>
             </div>

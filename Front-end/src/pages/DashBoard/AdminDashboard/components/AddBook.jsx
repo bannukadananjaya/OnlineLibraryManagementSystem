@@ -8,11 +8,13 @@ function AddBook() {
 
     const [isLoading, setIsLoading] = useState(false)
     const { user } = useContext(AuthContext)
-    const [data,setData] = useState();
+    const [data,setData] = useState({});
+    const [allCategories,setAllCategories] = useState([])
+    const [selectedCategories,setSelectedCategories]= useState()
 
     const handleInput = (e) => {
         const newInput = {[e.target.name]:e.target.value}
-        setData(prevData=>{prevData,newInput})
+        setData({...data,...newInput})
     }
    
     const [recentAddedBooks, setRecentAddedBooks] = useState([])
@@ -21,19 +23,37 @@ function AddBook() {
 
         const getRecentBooks = async()=>{
             try{    
-                const respose = await api.get('/recentBooks');
-
+                const respose = await api.get('/books/recentbooks');
                 const responseData = respose.data;
 
                 if(respose.status===200){
                     console.log("Get recent Books");
                     setRecentAddedBooks(responseData);
+                }else{
+                    console.log("Error geting recent books");
                 }
-                console.log("Error geting recent books")
+                
             }catch(err){
                 console.log(err);
             }
         }
+        const getCategories = async()=>{
+            try{    
+                const respose = await api.get('/categories');
+                const responseData = respose.data;
+
+                if(respose.status===200){
+                    console.log("Get recent Books");
+                    setAllCategories(responseData);
+                }else{
+                    console.log("Error geting recent books");
+                }
+                
+            }catch(err){
+                console.log(err);
+            }
+        }
+        getCategories();
         getRecentBooks();
 
     },[])
@@ -61,6 +81,15 @@ function AddBook() {
         setIsLoading(false)
     }
 
+    console.log(recentAddedBooks)
+    console.log(allCategories)
+    console.log(data)
+
+    const dropdownOptions = allCategories.map(category => ({
+        key: category._id, // Unique identifier
+        value: category._id, // Value to be used for selection
+        text: category.categoryName // Text to display in the dropdown
+    }));
     return (
         <div>
             <p className="dashboard-option-title">Add a Book</p>
@@ -91,14 +120,14 @@ function AddBook() {
                 <label className="addbook-form-label" htmlFor="categories">Categories<span className="required-field">*</span></label><br />
                 <div className="semanticdropdown">
                     <Dropdown
-                        placeholder='Category'
+                        placeholder='Categories:'
                         fluid
                         multiple
                         search
                         selection
-                        // options={allCategories}
-                        // value={selectedCategories}
-                        // onChange={(event, value) => setSelectedCategories(value.value)}
+                        options={dropdownOptions}
+                        value={selectedCategories}
+                        onChange={(event, value) => setSelectedCategories(value.value)}
                     />
                 </div>
 

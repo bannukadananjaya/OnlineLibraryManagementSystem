@@ -17,17 +17,6 @@ router.get("/", async (req, res) => {
     }
 })
 
-/* Get Book by book Id */
-router.get("/:id", async (req, res) => {
-    try {
-        const book = await Book.findById(req.params.id)
-                                .populate("transactions")
-        res.json(book)
-    }
-    catch(err) {
-        return res.status(500).json(err)
-    }
-})
 
 /* Get books by category name*/
 router.get("/category/:category", async (req, res) => {
@@ -48,47 +37,63 @@ router.get("/category/:category", async (req, res) => {
     }
 })
 
-// router.get('/popularBooks1', async (req,res)=>{
-//    try{
-//         console.log("popularBooks");
-//         const popularBooks = await Book.find()
-//             .sort({likes:-1})
-//             .limit(10);
+router.get('/popularbooks', async (req,res)=>{
+   try{
+        console.log("popularBooks");
+        const popularBooks = await Book.find()
+            .sort({likes:-1})
+            .limit(10);
 
-//         if (!popularBooks){
-//             console.log("NO books");
-//             res.status(404).json({success:false,message:"No books"})        
-//         }
+        if (!popularBooks || popularBooks.length === 0){
+            console.log("NO books");
+            res.status(404).json({success:false,message:"No books"})        
+        }
 
-//         console.log("Books retrived");
-//         res.status(200).json({success:true,message:"Bokks retrived",popularBooks})    
-//    }catch(err){
-//     console.log(err);
-//    }
-// })
+        console.log("Books retrived");
+        res.status(200).json({success:true,message:"Bokks retrived",popularBooks})    
+   }catch(err){
+    console.log(err);
+   }
+})
 
 // router.get()
-router.get('/popularBooks1', async (req,res)=>{
-    // try{
-        res.status(200)
-        // const recentBooks = await Book.find().limit(5)
-        // if(!recentBooks){
-        //     console.log("No books")
-        //     res.status(400).json({sucess:false,message:"No Books"})
-        // }
-        // console.log("Books retrived");
-        // res.status(200).json({message:"Bokks retrived",recentBooks})
-    // }catch(err){
-    //     console.log(err);
-    //     res.status(504).json(err);
-    // }
-    
+router.get('/recentbooks', async (req, res) => {
+    try {
+        const recentBooks = await Book.find()
+                                      .sort({ createdAt: -1 }) // Sort by most recent first
+                                      .limit(5);
+
+        if (recentBooks.length === 0) {
+            console.log("No books");
+            return res.status(404).json({ success: false, message: "No Books" });
+        }
+
+        console.log("Books retrieved");
+        res.status(200).json(recentBooks);
+    } catch (err) {
+        console.log(err);
+        res.status(504).json(err);
+    }
+});
+
+/* Get Book by book Id */
+router.get("/:id", async (req, res) => {
+    try {
+        const book = await Book.findById(req.params.id)
+                                .populate("transactions")
+        res.json(book)
+    }
+    catch(err) {
+        return res.status(500).json(err)
+    }
 })
 
 // Admin pannel
 /* Adding book */
 router.post("/addbook", async (req, res) => {
+    console.log(req.body);
     if (req.body.isAdmin) {
+        
         try {
             const newbook = await new Book({
                 bookName: req.body.bookName,
@@ -105,8 +110,10 @@ router.post("/addbook", async (req, res) => {
             const book = await newbook.save()
             // await BookCategory.updateMany({ '_id': book.categories }, { $push: { books: book._id } });
             res.status(200).json(book)
+            console.log("Book addded")
         }
         catch (err) {
+            console.log(err)
             res.status(504).json(err)
         }
     }

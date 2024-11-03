@@ -1,6 +1,9 @@
 import '../AdminDashboard.css';
 
-const Profile = (user) => {
+const Profile = (props) => {
+    // console.log("admin",props);
+    const {user} = props;
+    console.log(user)
   return (
     <div>
         <div className="user-details-topbar">

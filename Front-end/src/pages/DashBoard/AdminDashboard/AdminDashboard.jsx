@@ -1,6 +1,6 @@
-import { useState,useContext } from 'react'
+import { useState,useContext,useEffect } from 'react'
 import { AuthContext } from '../../../context/AuthContext'
-
+import api from '../../../api/api'
 import "./AdminDashboard.css"
 import AddTransaction from './components/AddTransaction'
 import AddMember from './components/AddMember'
@@ -26,7 +26,20 @@ function AdminDashboard() {
 
     const { user} = useContext(AuthContext);
     const [active, setActive] = useState("profile")
-    const [sidebar, setSidebar] = useState(true)
+    const [sidebar, setSidebar] = useState(true);
+    const [adminDetails,setAdminDetails] = useState({});
+
+    useEffect(() => {
+        const getAdminDetails = async () => {
+          try {
+            const response = await api.get("users/getuser/" + user.id);
+            setAdminDetails(response.data);
+          } catch (err) {
+            console.log("Error in fetching the member details");
+          }
+        };
+        getAdminDetails();
+      }, [user]);
 
     /* Logout Function*/
     const logout = () => {
@@ -66,7 +79,7 @@ function AdminDashboard() {
                 
               
                         <div className='dashboard-profile-content' style={active!=="profile"?{display:'none'}:{}}>
-                            <Profile user={user}/>
+                            <Profile user={adminDetails}/>
                         </div>
                         <div className="dashboard-addbooks-content" style={active !== "addbook" ? { display: 'none' } : {}}>
                             <AddBook />

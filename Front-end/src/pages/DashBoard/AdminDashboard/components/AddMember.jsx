@@ -5,10 +5,11 @@ import { Dropdown } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
+import api from '../../../../api/api';
 
 function AddMember() {
 
-    const API_URL = 'http://localhost:3000/'
+    // const API_URL = 'http://localhost:3000/'
     const [isLoading, setIsLoading] = useState(false)
 
     const [userFullName, setUserFullName] = useState(null)
@@ -55,7 +56,7 @@ function AddMember() {
                 password: password
             }
             try {
-                const response = await axios.post(API_URL + "api/auth/register", userData)
+                const response = await api.post('/auth/register', userData)
                 if (recentAddedMembers.length >= 5) {
                     recentAddedMembers.splice(-1)
                 }
@@ -88,7 +89,7 @@ function AddMember() {
     useEffect(() => {
         const getMembers = async () => {
             try {
-                const response = await axios.get(API_URL + "api/users/allmembers")
+                const response = await api.get("/users/allmembers")
                 const recentMembers = await response.data.slice(0, 5)
                 setRecentAddedMembers(recentMembers)
             }
@@ -97,7 +98,7 @@ function AddMember() {
             }
         }
         getMembers()
-    }, [API_URL])
+    }, [])
 
     return (
         <div>

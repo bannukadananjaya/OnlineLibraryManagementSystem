@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import "../AdminDashboard.css"
-import axios from "axios"
 import { AuthContext } from '../../../../Context/AuthContext'
 import { Dropdown } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment"
+import api from '../../../../api/api'
 
 function AddTransaction() {
-    const API_URL = 'http://localhost:3000/'
-    
+ 
     const [isLoading, setIsLoading] = useState(false)
     const { user } = useContext(AuthContext)
 
@@ -38,8 +37,8 @@ function AddTransaction() {
         e.preventDefault()
         setIsLoading(true)
         if (bookId !== "" && borrowerId !== "" && transactionType !== "" && fromDate !== null && toDate !== null) {
-            const borrower_details = await axios.get(API_URL + "api/users/getuser/" + borrowerId)
-            const book_details = await axios.get(API_URL + "api/books/getbook/" + bookId)
+            const borrower_details = await api.get("/users/getuser/" + borrowerId)
+            const book_details = await api.get("/books/getbook/" + bookId)
             
             /* Checking weather the book is available or not */
             if ((book_details.data.bookCountAvailable > 0 && (transactionType === "Issued" || transactionType === "Reserved")) || (book_details.data.bookCountAvailable === 0 && transactionType === "Reserved")) {
@@ -54,16 +53,16 @@ function AddTransaction() {
                     isAdmin: user.isAdmin
                 }
                 try {
-                    const response = await axios.post(API_URL + "api/transactions/add-transaction", transactionData)
+                    const response = await api.post("/transactions/add-transaction", transactionData)
                     if (recentTransactions.length >= 5) {
                         (recentTransactions.splice(-1))
                     }
-                    await axios.put(API_URL + `api/users/${response.data._id}/move-to-activetransactions`, {
+                    await api.put(`/users/${response.data._id}/move-to-activetransactions`, {
                         userId: borrowerId,
                         isAdmin: user.isAdmin
                     })
 
-                    await axios.put(API_URL+"api/books/updatebook/"+bookId,{
+                    await api.put("books/updatebook/"+bookId,{
                         isAdmin:user.isAdmin,
                         bookCountAvailable:book_details.data.bookCountAvailable - 1
                     })
@@ -97,7 +96,7 @@ function AddTransaction() {
     useEffect(() => {
         const getTransactions = async () => {
             try {
-                const response = await axios.get(API_URL + "api/transactions/all-transactions")
+                const response = await api.get("/transactions/all-transactions")
                 setRecentTransactions(response.data.slice(0, 5))
             }
             catch (err) {
@@ -106,7 +105,7 @@ function AddTransaction() {
 
         }
         getTransactions()
-    }, [API_URL])
+    }, [])
 
 
     /* Fetching borrower details */
@@ -114,7 +113,7 @@ function AddTransaction() {
         const getBorrowerDetails = async () => {
             try {
                 if (borrowerId !== "") {
-                    const response = await axios.get(API_URL + "api/users/getuser/" + borrowerId)
+                    const response = await api.get("/users/getuser/" + borrowerId)
                     setBorrowerDetails(response.data)
                 }
             }
@@ -123,14 +122,14 @@ function AddTransaction() {
             }
         }
         getBorrowerDetails()
-    }, [API_URL, borrowerId])
+    }, [ borrowerId])
 
 
     /* Fetching members */
     useEffect(() => {
         const getMembers = async () => {
             try {
-                const response = await axios.get(API_URL + "api/users/allmembers")
+                const response = await api.get("/users/allmembers")
                 const all_members = await response.data.map(member => (
                     { value: `${member?._id}`, text: `${member?.userType === "Student" ? `${member?.userFullName}[${member?.admissionId}]` : `${member?.userFullName}[${member?.employeeId}]`}` }
                 ))
@@ -141,20 +140,20 @@ function AddTransaction() {
             }
         }
         getMembers()
-    }, [API_URL])
+    }, [])
 
 
     /* Fetching books */
     useEffect(() => {
         const getallBooks = async () => {
-            const response = await axios.get(API_URL + "api/books/allbooks")
+            const response = await api.get("/books/allbooks")
             const allbooks = await response.data.map(book => (
                 { value: `${book._id}`, text: `${book.bookName}` }
             ))
             setAllBooks(allbooks)
         }
         getallBooks()
-    }, [API_URL])
+    }, [])
 
 
     return (
