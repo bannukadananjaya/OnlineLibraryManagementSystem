@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from './routes/auth.js';
@@ -7,11 +6,12 @@ import userRoutes from './routes/users.js';
 import bookRoutes from './routes/book.js';
 import transactionRoutes from "./routes/transactions.js";
 import categoryRoutes from './routes/category.js';
-// import images from './images/books';
+import dbConnect from './connectDB.js'
 
 /* App Config */
 dotenv.config();
 const app = express();
+dbConnect();
 const port = process.env.PORT || 3000;
 
 /* Middlewares */
@@ -25,20 +25,6 @@ app.use("/users", userRoutes);
 app.use("/books", bookRoutes);
 app.use("/transactions", transactionRoutes);
 app.use("/categories", categoryRoutes);
-
-/* MongoDB connection */
-mongoose.connect(
-
-  process.env.MONGO_URL,
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log("MONGODB CONNECTED");
-  }
-);
 
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to LibraryApp");

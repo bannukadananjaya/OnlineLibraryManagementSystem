@@ -18,7 +18,7 @@ router.get("/getuser/:id", async (req, res) => {
 /* Getting all members in the library */
 router.get("/allmembers", async (req,res)=>{
     try{
-        const users = await User.find({}).populate("activeTransactions").populate("prevTransactions").sort({_id:-1})
+        const users = await User.find({})
         res.status(200).json(users)
     }
     catch(err){

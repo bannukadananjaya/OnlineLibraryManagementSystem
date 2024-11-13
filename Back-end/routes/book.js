@@ -17,7 +17,15 @@ router.get("/", async (req, res) => {
     }
 })
 
+// Get categories
 
+router.get("/category", async(req,res)=>{
+    const category = await BookCategory.find({});
+    if(category){
+        return res.status(200).json({success:true,category});
+    }
+    res.status(404).json({message:"Category not found"});
+})
 /* Get books by category name*/
 router.get("/category/:category", async (req, res) => {
     // const category = req.query.category;
@@ -26,10 +34,9 @@ router.get("/category/:category", async (req, res) => {
         const category = await BookCategory.findOne({categoryName:req.params.category});
         console.log(category);
         if(!category){
-            res.status(404).json({message:"Category not found"});
+            return res.status(404).json({message:"Category not found"});
         }
-        const books = await Book.find({ categories: category._id})
-                                .populate("transactions")
+        const books = await Book.find({ categories: category._id})                  
         res.status(200).json(books)
     }
     catch (err) {
@@ -42,11 +49,11 @@ router.get('/popularbooks', async (req,res)=>{
         console.log("popularBooks");
         const popularBooks = await Book.find()
             .sort({likes:-1})
-            .limit(10);
+            .limit(9);
 
         if (!popularBooks || popularBooks.length === 0){
             console.log("NO books");
-            res.status(404).json({success:false,message:"No books"})        
+            return res.status(404).json({success:false,message:"No books"})        
         }
 
         console.log("Books retrived");
@@ -118,7 +125,7 @@ router.post("/addbook", async (req, res) => {
         }
     }
     else {
-        return res.status(403).json("You dont have permission to delete a book!");
+        return res.status(403).json("You dont have permission to add a book!");
     }
 })
 

@@ -42,10 +42,6 @@ const BookSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId, 
         ref: "BookCategory" 
     }],
-    transactions:[{
-        type:mongoose.Types.ObjectId,
-        ref:"BookTransaction"
-    }],
     likes:{
         type:Number,
         default:0

@@ -27,11 +27,12 @@ function Home() {
       <ImageSlider/>
       <WelcomeBox/>
       <Stats/>
-      {/* <Categories/> */}
+      <Categories/>
       {/* <PopularBooks props={books[0].books}/> */}
-      {/* <RecentAddedBooks/> */}
+      <PopularBooks/>
+      <RecentAddedBooks/>
       {/* <ReservedBooks/> */}
-      {/* <News/> */}
+      <News/>
     </div>
   );
 }

@@ -5,20 +5,24 @@ import { useEffect, useState } from "react";
 import BookCard from "../../pages/Books/BookCard";
 
 const PopularBooks = (props) => {
-  console.log("prps",props)
+  // console.log("prps",props)
 
   // const {books} = props;
   // console.log(props.);
-  // const [books, setBooks] = useState();
+  const [books, setBooks] = useState([]);
 
-  /*Earliar every time data get from databasse*
+  // Earliar every time data get from databasse
   useEffect(() => {
     const getPopularBooks = async () => {
       try {
-        const response = await api.get( + "/books/popularBooks");
-
-        setBooks(response.data);
-        console.log(response);
+        const response = await api.get("/books/popularBooks");
+        const resdata = response.data;
+        if(response.status==200){
+          const {popularBooks} = resdata;
+          setBooks(popularBooks);
+          console.log(resdata);
+        }
+        
       } catch (error) {
         console.error("Error fetching books:", error);
       }
@@ -26,7 +30,7 @@ const PopularBooks = (props) => {
     getPopularBooks();
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const getAllCategories = async () => {
       try {
         const response = await axios.get(
@@ -47,24 +51,28 @@ const PopularBooks = (props) => {
     };
     getAllCategories();
   }, [API_URL]);*/
+  console.log("BookS:",books)
 
-if(!props)
-  return <p>Loading</p>
-if(props)
+// if(!props)
+//   return <p>Loading</p>
+// if(props)
   return (
     <div className="popularbooks-container">
       <h className="popularbooks-title">Popular Books</h>
       <div className="books">
         
         {/* get 10 books */}
-        {/* {props.props.slice(0,10).map((book, index) => { 
+        {/* {props.props.slice(0,10).map((book, index) => {  */}
           
+        {books.map((book,index)=>{
+        
           return (
-            <BookCard props={book} key={index} />
-          )})} */}
+            <BookCard book={book} key={index} />
+          )})}
       </div>
     </div>
   );
+  
 };
 
 export default PopularBooks;
